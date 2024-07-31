@@ -10,40 +10,58 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+// main.cpp
+#include <iostream>
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
-    try
-    {
-        Bureaucrat bob("Bob", 2);
-        Bureaucrat alice("Alice", 140);
+    try {
+        Bureaucrat bob("Bob", 1);
+        Intern someRandomIntern;
+        
+        AForm* rrf;
+        rrf = someRandomIntern.makeForm("robotomy request", "Bender");
+        if (rrf)
+        {
+            bob.signForm(*rrf);
+            bob.executeForm(*rrf);
+            delete rrf;
+        }
 
-        ShrubberyCreationForm shrubberyForm("home");
-        RobotomyRequestForm robotomyForm("Alice");
-        PresidentialPardonForm pardonForm("Bob");
+        AForm* scf;
+        scf = someRandomIntern.makeForm("shrubbery creation", "Home");
+        if (scf)
+        {
+            bob.signForm(*scf);
+            bob.executeForm(*scf);
+            delete scf;
+        }
 
-        std::cout << bob << std::endl;
-        std::cout << alice << std::endl;
+        AForm* ppf;
+        ppf = someRandomIntern.makeForm("presidential pardon", "Ford Prefect");
+        if (ppf)
+        {
+            bob.signForm(*ppf);
+            bob.executeForm(*ppf);
+            delete ppf;
+        }
 
-        alice.signForm(shrubberyForm);
-        bob.signForm(robotomyForm);
-        bob.signForm(pardonForm);
-
-        std::cout << shrubberyForm << std::endl;
-        std::cout << robotomyForm << std::endl;
-        std::cout << pardonForm << std::endl;
-
-        alice.executeForm(shrubberyForm);
-        bob.executeForm(robotomyForm);
-        bob.executeForm(pardonForm);
+        AForm* nonExistentForm;
+        nonExistentForm = someRandomIntern.makeForm("nonexistent form", "Nobody");
+        if (nonExistentForm)
+        {
+            delete nonExistentForm;
+        }
     }
-    catch (const std::exception &e)
+    catch (std::exception& e)
     {
-        std::cerr << "Exception: " << e.what() << std::endl;
+        std::cerr << e.what() << std::endl;
     }
 
     return 0;
