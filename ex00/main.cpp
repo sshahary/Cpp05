@@ -6,7 +6,7 @@
 /*   By: sshahary <sshahary@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 22:28:13 by sshahary          #+#    #+#             */
-/*   Updated: 2024/07/27 22:29:25 by sshahary         ###   ########.fr       */
+/*   Updated: 2024/08/01 23:06:56 by sshahary         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 int main()
 {
 	try
+	
 	{
 		Bureaucrat bob("Bob", 2);
 		std::cout << bob << std::endl;
